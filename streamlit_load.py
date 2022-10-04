@@ -64,7 +64,7 @@ def main():
     API_URL = "https://projet7ocdashboard.herokuapp.com/api/" # ton URL
 
     # -----------------------------------------------
-    '''
+    
     @st.cache
     def fetch_cust_ids():
         # URL of the sk_id API
@@ -95,8 +95,8 @@ def main():
     if st.sidebar.checkbox("Customer's Data"):
         st.subheader('Data of the selected customer')
         st.write(data_cust_by_id)
-    '''
-#    
+    
+    
     
 
 
