@@ -357,4 +357,4 @@ if st.sidebar.checkbox("Display Features Descriptions"):
         st.dataframe(data=df_feat_desc, width=1200)
 
 if __name__ == "__main__":
-main()
+    main()
