@@ -27,31 +27,31 @@ model_threshold = 48.7
 ##############################################################################
 # ----------------------------------------------------
 def main():
-# ------------------------------------------------
-# Configuration of the streamlit page
-# -----------------------------------------------
-st.set_page_config(page_title='Loan application scoring dashboard',
-page_icon='🧊',
-layout='centered',
-initial_sidebar_state='auto')
-# Display the title
-st.markdown("<h1 style='text-align: center; color: green;'>Loan application scoring dashboard</h1>", unsafe_allow_html=True)
+    # ------------------------------------------------
+    # Configuration of the streamlit page
+    # -----------------------------------------------
+    st.set_page_config(page_title='Loan application scoring dashboard',
+    page_icon='🧊',
+    layout='centered',
+    initial_sidebar_state='auto')
+    # Display the title
+    st.markdown("<h1 style='text-align: center; color: green;'>Loan application scoring dashboard</h1>", unsafe_allow_html=True)
 
-#st.title('Loan application scoring dashboard')
+    #st.title('Loan application scoring dashboard')
 
-# Display the LOGO
-img = Image.open("LOGO.png")
-st.sidebar.image(img, width=250)
+    # Display the LOGO
+    img = Image.open("LOGO.png")
+    st.sidebar.image(img, width=250)
 
-# Display the loan image
-img = Image.open("loan.png")
-col1, col2, col3 = st.columns(3)
-with col1:
-st.write(' ')
-with col2:
-st.image(img, width=350)
-with col3:
-st.write(' ')
+    # Display the loan image
+    img = Image.open("loan.png")
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.write(' ')
+    with col2:
+        st.image(img, width=350)
+    with col3:
+        st.write(' ')
 
 ###############################################################################
 # LIST OF API REQUEST FUNCTIONS
