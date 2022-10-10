@@ -38,7 +38,7 @@ df_shap_values.set_index('Unnamed: 0', inplace=True)
 np_shap_values = np.load('np_shap.npy')
 
 #load saved model
-xgb = joblib.load('modele_P7.sav')
+xgb = joblib.load('modele_xgb_P7.sav')
 
 @app.route("/")
 def hello():
