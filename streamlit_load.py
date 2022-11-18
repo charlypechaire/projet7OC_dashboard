@@ -19,7 +19,6 @@ from matplotlib.patches import Circle, Wedge, Rectangle
 from PIL import Image
 import io
 import zlib
-from dotenv import load_dotenv
 from os.path import join, dirname
 import os
 
@@ -35,9 +34,11 @@ model_threshold = 48.7
 # ----------------------------------------------------
 def main():
     
-    
-    dotenv_path = join(dirname(__file__), '.env')
-    load_dotenv(dotenv_path)
+    if not os.environ.get("APP_ENV"):
+        from os.path import join, dirname
+        from dotenv import load_dotenv
+        dotenv_path = join(dirname(__file__), '.env')
+        load_dotenv(dotenv_path)
     # ------------------------------------------------
     # Configuration of the streamlit page
     # -----------------------------------------------

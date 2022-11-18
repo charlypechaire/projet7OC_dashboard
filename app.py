@@ -18,11 +18,8 @@ from dotenv import load_dotenv
 from os.path import join, dirname
 
 
-if not os.environ.get("APP_ENV"):
-    from os.path import join, dirname
-    from dotenv import load_dotenv
-    dotenv_path = join(dirname(__file__), '.env')
-    load_dotenv(dotenv_path)
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
 class NumpyArrayEncoder(JSONEncoder):
     def default(self, obj):
