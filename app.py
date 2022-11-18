@@ -33,11 +33,8 @@ class NumpyArrayEncoder(JSONEncoder):
 
 app = Flask(__name__)
 API_URL = os.environ.get("API_URL")
-@app.route('/', methods=['GET','POST'])
-def test():
-    print("ok3")
-    return ('test.html')
-'''
+
+
 df_features_desc = pd.read_csv('data_P7.csv', low_memory=False)
 df_features_desc.drop('Unnamed: 0', axis=1, errors='ignore', inplace=True)
 
@@ -171,6 +168,6 @@ def get_X_test():
 def get_features_desc():
     global df_features_desc
     return jsonify(df_features_desc.to_json())
-'''
+
 if __name__ == "__main__":
     app.run(debug=True)
