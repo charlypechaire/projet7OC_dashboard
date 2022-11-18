@@ -1,0 +1,13 @@
+streamlit
+pandas
+numpy
+matplotlib
+seaborn
+flask
+joblib
+gunicorn
+plotly
+streamlit_shap
+shap
+requests
+dotenv

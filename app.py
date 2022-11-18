@@ -14,22 +14,32 @@ import joblib
 from sklearn.neighbors import NearestNeighbors
 import shap
 import pickle
+from dotenv import load_dotenv
+from os.path import join, dirname
+
+
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
 class NumpyArrayEncoder(JSONEncoder):
-def default(self, obj):
-if isinstance(obj, numpy.ndarray):
-return obj.tolist()
-return JSONEncoder.default(self, obj)
+    def default(self, obj):
+        if isinstance(obj, numpy.ndarray):
+            return obj.tolist()
+        return JSONEncoder.default(self, obj)
+
 
 app = Flask(__name__)
-API_URL = 
-
+API_URL = os.environ.get("API_URL")
+@app.route('/', methods=['GET','POST'])
+def test():
+    print("ok3")
+    return ('test.html')
+'''
 df_features_desc = pd.read_csv('data_P7.csv', low_memory=False)
 df_features_desc.drop('Unnamed: 0', axis=1, errors='ignore', inplace=True)
 
 X_test = pd.read_csv('test_P7.csv', low_memory=False)
-X_test.drop('Unnamed: 0.1', axis=1, errors='ignore', inplace=True)
-X_test.set_index('Unnamed: 0', inplace=True)
+X_test.drop('Unnamed: 0', axis=1, errors='ignore', inplace=True)
 X_test['SK_ID_CURR'] = X_test['SK_ID_CURR'].astype('int')
 
 df_shap_values = pd.read_csv('data_shap.csv')
@@ -69,8 +79,8 @@ def get_cust_data_by_id():
 def get_list_cust_id():
     # URL of the sk_id API
     # list_cust_id_api_url = API_URL + "list_cust_id/"
-    list_cust_id = list(X_test['SK_ID_CURR'])
-    return jsonify({'ids': list_cust_id})
+    list_cust_id = X_test["SK_ID_CURR"].tolist()
+    return jsonify({"ids": list_cust_id})
 
 @app.route('/api/explainer_expected_value/')
 # Get the explainer.expected_value
@@ -116,10 +126,10 @@ def get_shap():
     shap_vals_cust_json = json.loads(shap_vals_cust.to_json())
     # Returning the processed data
     return jsonify({'status': 'ok',
-'X_neigh_': X_neigh_json,
-'shap_val_neigh': shap_val_neigh_json, # double liste
-'expected_vals': expected_vals_json, # liste
-'shap_val_cust': shap_vals_cust_json}) # double liste
+                    'X_neigh_': X_neigh_json,
+                    'shap_val_neigh': shap_val_neigh_json, # double liste
+                    'expected_vals': expected_vals_json, # liste
+                    'shap_val_cust': shap_vals_cust_json}) # double liste
 
 @app.route('/api/shap_values/', methods=['GET', 'POST'])
 # Get the shap_values
@@ -158,6 +168,6 @@ def get_X_test():
 def get_features_desc():
     global df_features_desc
     return jsonify(df_features_desc.to_json())
-
+'''
 if __name__ == "__main__":
-app.run(debug=True)
+    app.run(debug=True)
