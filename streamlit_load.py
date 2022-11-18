@@ -73,7 +73,6 @@ def main():
     API_URL = os.environ.get("API_URL")
     
     # -----------------------------------------------
-    @st.cache
     def fetch_cust_ids():
         # URL of the sk_id API
         list_cust_id_api_url = API_URL + "list_cust_id/"
@@ -81,7 +80,6 @@ def main():
         cust_ids = cust_ids["ids"]
         return cust_ids
     
-    @st.cache
     def fetch_data_cust_by_id(selected_id):
         # URL of the sk_id API
         data_cust_by_id_api_url = API_URL + "data_cust_by_id/?id=" + str(selected_id)
@@ -89,7 +87,6 @@ def main():
         data_cust_by_id = pd.DataFrame.from_dict(data_cust_by_id['data'])
         return data_cust_by_id
 
-    @st.cache
     def fetch_score_cust_by_id(selected_id):
         # URL of the sk_id API
         score_api_url = API_URL + 'score_by_id/?id=' + str(selected_id)
@@ -97,7 +94,6 @@ def main():
         score_value = score_value['score']
         return score_value
 
-    @st.cache(allow_output_mutation=True)
     def fetch_data_of_all_cust():
         # URL of the sk_id API
         X_test_api_url = API_URL + "X_test/"
@@ -105,7 +101,6 @@ def main():
         X_test = pd.DataFrame(X_test_dict)
         return X_test
 
-    @st.cache(allow_output_mutation=True)
     def fetch_feat_desc():
         # URL of the sk_id API
         df_features_desc_api_url = API_URL + "df_features_desc/"
@@ -113,7 +108,7 @@ def main():
         df_features_desc = pd.DataFrame(df_features_desc_dict)
         return df_features_desc
 
-    @st.cache
+
     def fetch_explainer_expected_value():
         # URL of the sk_id API
         explainer_expected_value_api_url = API_URL + 'explainer_expected_value/'
@@ -121,7 +116,7 @@ def main():
         explainer_expected_value = explainer_expected_value['explainer_expected_value']
         return explainer_expected_value
 
-    @st.cache
+    
     def fetch_shap_values():
         # URL of the sk_id API
         shap_values_api_url = API_URL + "shap_values/"
@@ -130,7 +125,7 @@ def main():
         finalNumpyArray = np.asarray(decodedArrays["array"])
         return finalNumpyArray
 
-    @st.cache
+
     def fetch_shap_value_by_id(selected_id):
         # URL of the sk_id API
         shap_by_id_api_url = API_URL + 'shap_value_by_id/?id=' + str(selected_id)
@@ -155,7 +150,6 @@ def main():
         st.pyplot(plt.gcf())
 
     # Local SHAP Graphs
-    @st.cache(allow_output_mutation=True)
     def force_plot(selected_id):
         X_test = fetch_data_of_all_cust()
         data = X_test.drop(['score', 'classes'], axis=1, errors='ignore')
@@ -164,7 +158,6 @@ def main():
         return shap.force_plot(explainer_expected_value, shap_value_by_id, data.columns)
 
     # Gauge chart
-    @st.cache
     def gauge_chart(score_value):
         fig = go.Figure(go.Indicator(mode="gauge+number",
                                      number={'suffix': "%", 'font': {'size': 50}},
