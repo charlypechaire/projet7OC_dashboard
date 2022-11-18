@@ -78,7 +78,6 @@ def main():
         # URL of the sk_id API
         list_cust_id_api_url = API_URL + "list_cust_id/"
         cust_ids = requests.post(list_cust_id_api_url).json()
-        cust_ids = json.loads(cust_ids.text)
         cust_ids = cust_ids["ids"]
         return cust_ids
     
@@ -207,7 +206,7 @@ def main():
     ##############################################################################
     # Model's decision checkbox
     ##############################################################################
-    if st.sidebar.checkbox("Model's Decision", key=38):
+    if st.sidebar.checkbox("Model's Decision"):
         st.subheader("Model's Decision")
         # Display score (probability):
         score_value = fetch_score_cust_by_id(selected_id)
@@ -220,17 +219,18 @@ def main():
         else:
             decision = "Loan rejected"
         st.write("Decision :", decision)
-    ##########################################################################
-    # Display customer's gauge meter chart (checkbox)
-    ##########################################################################
-    figure = gauge_chart(score_value)
-    st.plotly_chart(figure)
-    # Add markdown
-    st.markdown('_Gauge meter plot for the applicant customer_')
-    expander = st.expander("Concerning the classification model...")
-    expander.write("The prediction was made using the XGBoost Classifier Model")
-    expander.write("The default model is calculated to maximize air under ROC curve => maximize \
-                    True Positives rate (TP) detection and minimize False Negatives rate (FP)")
+
+        ##########################################################################
+        # Display customer's gauge meter chart (checkbox)
+        ##########################################################################
+        figure = gauge_chart(score_value)
+        st.plotly_chart(figure)
+        # Add markdown
+        st.markdown('_Gauge meter plot for the applicant customer_')
+        expander = st.expander("Concerning the classification model...")
+        expander.write("The prediction was made using the XGBoost Classifier Model")
+        expander.write("The default model is calculated to maximize air under ROC curve => maximize \
+                        True Positives rate (TP) detection and minimize False Negatives rate (FP)")
     ##########################################################################
     # Display local SHAP force plot checkbox
     ##########################################################################
@@ -253,7 +253,7 @@ def main():
     ##############################################################################
     # Importance of the features checkbox
     ##############################################################################
-    if st.sidebar.checkbox("Importance Of The Features", key=38):
+    if st.sidebar.checkbox("Importance Of The Features"):
         st.subheader('Importance Of The Features')
         nb_features = st.slider("Number of features to display",
                                 min_value=2,
