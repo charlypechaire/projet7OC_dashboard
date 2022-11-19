@@ -14,8 +14,7 @@ import joblib
 from sklearn.neighbors import NearestNeighbors
 import shap
 import pickle
-from dotenv import load_dotenv
-from os.path import join, dirname
+
 
 
 if not os.environ.get("APP_ENV"):
