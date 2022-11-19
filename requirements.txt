@@ -11,3 +11,4 @@ streamlit_shap
 shap
 requests
 sklearn
+xgboost
