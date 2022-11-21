@@ -39,7 +39,7 @@ df_features_desc = pd.read_csv('data_P7.csv', low_memory=False)
 df_features_desc.drop('Unnamed: 0', axis=1, errors='ignore', inplace=True)
 
 X_test = pd.read_csv('test_P7.csv', low_memory=False)
-X_test.drop('Unnamed: 0', axis=1, errors='ignore', inplace=True)
+X_test.set_index('Unnamed: 0', inplace=True)
 X_test['SK_ID_CURR'] = X_test['SK_ID_CURR'].astype('int')
 
 df_shap_values = pd.read_csv('data_shap.csv')
