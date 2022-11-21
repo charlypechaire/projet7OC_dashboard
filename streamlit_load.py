@@ -152,7 +152,7 @@ def main():
     # Local SHAP Graphs
     def force_plot(selected_id):
         X_test = fetch_data_of_all_cust()
-        data = X_test.drop(['score', 'classes'], axis=1, errors='ignore')
+        data = X_test.drop(['score', 'classes', 'index', 'TARGET'], axis=1, errors='ignore')
         explainer_expected_value = fetch_explainer_expected_value()
         shap_value_by_id = fetch_shap_value_by_id(selected_id)
         return shap.force_plot(explainer_expected_value, shap_value_by_id, data.columns)
@@ -255,7 +255,7 @@ def main():
                                 step=None,
                                 format=None,
                                 key=14)
-        if st.checkbox('plot_type="bar"', key=25):
+        if st.checkbox('plot_type="bar"', key=30):
             display_shap_summary(nb_features, plot_type="bar")
         else:
             display_shap_summary(nb_features)
