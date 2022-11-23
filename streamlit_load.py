@@ -141,7 +141,7 @@ def main():
     def display_shap_summary(nb_features, plot_type=None):
         shap_values = fetch_shap_values()
         X_test = fetch_data_of_all_cust()
-        X_test_without_score = X_test.drop(['score', 'classes'], axis=1, errors='ignore')
+        X_test_without_score = X_test.drop(['score', 'classes', 'index', 'TARGET', 'SK_ID_CURR'], axis=1, errors='ignore')
         if plot_type:
             shap.summary_plot(shap_values, X_test_without_score, max_display=nb_features, plot_type="bar")
         else:
@@ -152,7 +152,7 @@ def main():
     # Local SHAP Graphs
     def force_plot(selected_id):
         X_test = fetch_data_of_all_cust()
-        data = X_test.drop(['score', 'classes', 'index', 'TARGET'], axis=1, errors='ignore')
+        data = X_test.drop(['score', 'classes', 'index', 'TARGET', 'SK_ID_CURR'], axis=1, errors='ignore')
         explainer_expected_value = fetch_explainer_expected_value()
         shap_value_by_id = fetch_shap_value_by_id(selected_id)
         return shap.force_plot(explainer_expected_value, shap_value_by_id, data.columns)
@@ -351,17 +351,7 @@ def main():
                         The green boxplot are for the customers that are accepted for their loan, and red boxplots are \
                         for the customers that are rejected. Values for the applicant customer are superimposed in blue star marker.")
 
-    ##########################################################################
-    # Display Features Descriptions
-    ##########################################################################
-    if st.sidebar.checkbox("Display Features Descriptions"):
-        st.subheader('Display Features Descriptions')
-        df_feat_desc = fetch_feat_desc()
-        features = list(df_feat_desc['Feature'].values)
-        selected_feature = st.selectbox('Select feature to display:', features)
-        st.write(df_feat_desc[df_feat_desc['Feature'] == selected_feature].iloc[0])
-        if st.checkbox("Show all"):
-            st.dataframe(data=df_feat_desc, width=1200)
+
 
 if __name__ == "__main__":
     main()
